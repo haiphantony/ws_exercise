@@ -1,24 +1,42 @@
-# README
+## Local development
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+### Required software
 
-* Ruby version
+* Ruby 2.5.0
 
-* System dependencies
+* Ruby on Rails 5.1.5
 
-* Configuration
+* PostgreSQL 9.5 or later
 
-* Database creation
+### Database setup
 
-* Database initialization
+```
+bin/rails db:setup
 
-* How to run the test suite
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+### Run Specs (Tests)
 
-* Deployment instructions
+```
+bundle exec rspec
 
-* ...
+```
+
+
+### Start local servers
+
+```
+bundle exec foreman start
+
+=> You should access http://localhost:5000/
+
+or
+
+(on different tabs)
+
+bin/rails server
+
+bin/webpack-dev-server
+
+```
