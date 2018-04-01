@@ -28,6 +28,7 @@ group :development do
   gem 'rubocop', require: false
   gem 'overcommit'
   gem 'foreman'
+  gem 'scss_lint', require: false
 end
 
 group :test do
