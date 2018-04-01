@@ -5,3 +5,31 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+#create language
+
+Language.destroy_all
+Language.create([{ code: 'vn' }, { code: 'en' }, { code: 'ja' }])
+p "Created #{Language.count} language"
+
+#create programming_languages
+
+ProgrammingLanguage.destroy_all
+ProgrammingLanguage.create([
+	{
+		name: 'ruby'
+	},
+	{
+		name: 'javascript'
+	},
+	{
+		name: 'php'
+	},
+	{
+		name: 'pithon'
+	},
+	{
+		name: 'kotlin'
+	}
+])
+
