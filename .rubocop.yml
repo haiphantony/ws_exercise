@@ -22,6 +22,7 @@ Metrics/BlockLength:
     - spec/factories/*
     - spec/support/*
     - Guardfile
+    - lib/tasks/dev.rake
 Naming/FileName:
   Exclude:
     - Gemfile
