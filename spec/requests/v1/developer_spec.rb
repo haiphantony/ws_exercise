@@ -17,8 +17,10 @@ RSpec.describe 'Api::V1::DevelopersController', type: :request do
         {
           data: @developer.languages.map do |language|
             {
-              id: language.id.to_s,
-              type: 'languages'
+              id: language.id,
+              code: language.code,
+              "created-at": language.created_at.as_json,
+              "updated-at": language.updated_at.as_json
             }
           end
         }
@@ -27,8 +29,10 @@ RSpec.describe 'Api::V1::DevelopersController', type: :request do
         {
           data: @developer.programming_languages.map do |programming_language|
             {
-              id: programming_language.id.to_s,
-              type: 'programming_languages'
+              id: programming_language.id,
+              name: programming_language.name,
+              "created-at": programming_language.created_at.as_json,
+              "updated-at": programming_language.updated_at.as_json
             }
           end
         }
@@ -44,7 +48,7 @@ RSpec.describe 'Api::V1::DevelopersController', type: :request do
               },
               relationships: {
                 languages: languages,
-                programming_languages: programming_languages
+                "programming-languages": programming_languages
               }
             }
           end
@@ -66,8 +70,10 @@ RSpec.describe 'Api::V1::DevelopersController', type: :request do
         {
           data: @developer.languages.map do |language|
             {
-              id: language.id.to_s,
-              type: 'languages'
+              id: language.id,
+              code: language.code,
+              "created-at": language.created_at.as_json,
+              "updated-at": language.updated_at.as_json
             }
           end
         }
@@ -76,8 +82,10 @@ RSpec.describe 'Api::V1::DevelopersController', type: :request do
         {
           data: @developer.programming_languages.map do |programming_language|
             {
-              id: programming_language.id.to_s,
-              type: 'programming_languages'
+              id: programming_language.id,
+              name: programming_language.name,
+              "created-at": programming_language.created_at.as_json,
+              "updated-at": programming_language.updated_at.as_json
             }
           end
         }
@@ -92,7 +100,7 @@ RSpec.describe 'Api::V1::DevelopersController', type: :request do
             },
             relationships: {
               languages: languages,
-              programming_languages: programming_languages
+              "programming-languages": programming_languages
             }
           }
         }
