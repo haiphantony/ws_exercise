@@ -4,47 +4,45 @@ require 'rails_helper'
 
 RSpec.describe 'Developer search', type: :system do
   before do
-    @developer = create(:developer, email: 'phanthanhhai07t1@gmail.com')
-    @language = create(:language, code: 'en')
-    create(:language, code: 'vi')
-    @programming_language = create(:programming_language, name: 'ruby')
-    create(:programming_language, name: 'php')
-    @developer_language = create(:developer_language, developer_id: @developer.id, language_id: @language.id)
-    @developer_programming_language = create(:developer_programming_language, developer_id: @developer.id,
-                                                                              programming_language_id: @programming_language.id)
+    @language = create(:language)
+    @programming_language = create :programming_language
+    @developer = create(:developer)
+    @developer_language = create :developer, languages: [@language]
+    @developer_programming_language = create :developer,
+                                             programming_languages: [@programming_language]
+    @developer_language_programming = create :developer,
+                                             languages: [@language],
+                                             programming_languages: [@programming_language]
   end
-  it 'proceeds to search first load page' do
+
+  it 'show all rerords when load page' do
     visit root_path
-    expect(page).to have_content 'List developers'
-    expect(page).to have_content('phanthanhhai07t1@gmail.com')
+    expect(page).to have_content(@developer.email)
   end
-  it 'proceeds to search no select language and programming language' do
+
+  it 'shows matched records when a language is specified' do
     visit developers_path
-    expect(page).to have_content 'List developers'
+    select @language.code, from: 'developer_search_form[language_id]'
     click_on 'Search'
-    expect(page).to have_content('phanthanhhai07t1@gmail.com')
+    expect(page).to have_content(@developer_language.email)
+    expect(page).to have_select('developer_search_form[language_id]', selected: @language.code)
   end
-  it 'proceeds to search correct language and no select programming language' do
+
+  it 'shows matched records when a programming language is specified' do
     visit developers_path
-    expect(page).to have_content 'List developers'
-    select 'en', from: 'developer_search_form_language_id'
+    select @programming_language.name, from: 'developer_search_form[programming_language_id]'
     click_on 'Search'
-    expect(page).to have_content('phanthanhhai07t1@gmail.com')
+    expect(page).to have_content(@developer_programming_language.email)
+    expect(page).to have_select('developer_search_form[programming_language_id]', selected: @programming_language.name)
   end
-  it 'proceeds to search no select language and correct programming language' do
+
+  it 'shows matched records when language and programming language are specified' do
     visit developers_path
-    expect(page).to have_content 'List developers'
-    select 'ruby', from: 'developer_search_form_programming_language_id'
+    select @language.code, from: 'developer_search_form[language_id]'
+    select @programming_language.name, from: 'developer_search_form[programming_language_id]'
     click_on 'Search'
-    expect(page).to have_content('phanthanhhai07t1@gmail.com')
-  end
-  it 'proceeds to search incorrect language and incorrect programming language' do
-    visit developers_path
-    expect(page).to have_content 'List developers'
-    select 'php', from: 'developer_search_form_programming_language_id'
-    select 'en', from: 'developer_search_form_language_id'
-    click_on 'Search'
-    expect(page).to have_no_content('phanthanhhai07t1@gmail.com')
+    expect(page).to have_content(@developer_language_programming.email)
+    expect(page).to have_select('developer_search_form[language_id]', selected: @language.code)
+    expect(page).to have_select('developer_search_form[programming_language_id]', selected: @programming_language.name)
   end
 end
-# rubocop:enable

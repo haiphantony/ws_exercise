@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :programming_language do
-    name  { Faker::Lorem.words(4) }
+    name  { Faker::ProgrammingLanguage.name }
   end
 end
