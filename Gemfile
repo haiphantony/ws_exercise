@@ -14,6 +14,8 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'turbolinks', '~> 5'
 gem 'webpacker'
+gem 'virtus'
+gem 'bootstrap', '~> 4.0.0'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
@@ -21,6 +23,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'bundler-audit', require: false
   gem 'brakeman', require: false
+  gem 'faker'
 end
 
 group :development do

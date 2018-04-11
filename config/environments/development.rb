@@ -62,5 +62,8 @@ Rails.application.configure do
     Bullet.console = true
     Bullet.rails_logger = true
     Bullet.add_footer = true
+    Bullet.add_whitelist :type => :n_plus_one_query , :class_name => "Developer", :association => :developer_languages
+    Bullet.add_whitelist :type => :n_plus_one_query , :class_name => "Developer", :association => :developer_programming_languages
+
   end
 end
